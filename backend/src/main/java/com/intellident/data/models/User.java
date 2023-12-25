@@ -8,7 +8,7 @@ public class User {
     @Id
     public String id;
     public String name;
-    public String mobileNo;
+    public String mobileNumber;
     public Number age;
     public String gender;
 }
