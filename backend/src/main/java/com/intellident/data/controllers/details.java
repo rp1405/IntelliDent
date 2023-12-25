@@ -12,9 +12,10 @@ import java.util.Objects;
 public class details {
     @Autowired
     MongoRepo Repo;
-    @GetMapping("/getUser")
+
+    @GetMapping("/getUserDataByMobileNumber")
     @CrossOrigin(origins = "*")
-    public User getUserData(@RequestParam String mobileNo){
+    public User getUserDataByMobileNumber(@RequestParam String mobileNo){
         List<User> data=Repo.findAll();
         for(User x:data){
             System.out.print(x.mobileNo);
@@ -25,6 +26,13 @@ public class details {
         }
         return null;
     }
+
+    @GetMapping("/getUserDataById")
+    @CrossOrigin(origins = "*")
+    public User getUserDataById(@RequestParam String id){
+        return Repo.findById(id).orElse(null);
+    }
+
     @PostMapping("/addNewUser")
     @CrossOrigin(origins = "*")
     public User addUser(@RequestBody User details){
