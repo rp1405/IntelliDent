@@ -35,7 +35,12 @@ public class details {
 
     @PostMapping("/addNewUser")
     @CrossOrigin(origins = "*")
-    public User addUser(@RequestBody User details){
+    public User addNewUser(@RequestBody User details){
+        return Repo.save(details);
+    }
+    @PatchMapping("/updateUser")
+    @CrossOrigin(origins = "*")
+    public User updateUser(@RequestBody User details){
         return Repo.save(details);
     }
 }
