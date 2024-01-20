@@ -12,8 +12,8 @@ public class User {
                 public String status;
                 public String link;
             }
-            public Info diastemia;
-            public Info cavities;
+            public Info spacesBetweenTeeth;
+            public Info dentalCavity;
             public Info dentalStain;
             public Info dentalCalculus;
         }
