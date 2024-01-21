@@ -11,22 +11,33 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to obtain tooth scans."
-      }
+      },
+      "bundleIdentifier": "intellident"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rohan_pareek.IntelliDent"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4a477eea-cc7c-4fbb-88f4-ad7e884d10e3"
+      }
     }
   },
-  "plugins": [[]]
+  "plugins": [
+    []
+  ]
 }

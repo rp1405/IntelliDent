@@ -91,7 +91,11 @@ export default function Homepage({ navigation }) {
       async function sendDentalFile(condition, status, link, mobileNumber) {
         if (status === "positive") {
           await sendFile(mobileNumber, condition, link);
-          await sendFile(process.env.ADMIN_MOBILE_NUMBER, condition, link);
+          await sendFile(
+            process.env.EXPO_PUBLIC_ADMIN_MOBILE_NUMBER,
+            condition,
+            link
+          );
         }
       }
       // console.log(1);
@@ -222,7 +226,7 @@ export default function Homepage({ navigation }) {
         language == "English" ? messageEnglish : messageHindi
       );
       await sendMessage(
-        process.env.ADMIN_MOBILE_NUMBER,
+        process.env.EXPO_PUBLIC_ADMIN_MOBILE_NUMBER,
         language == "English" ? messageEnglish : messageHindi
       );
       setImgUrl(placeholderImage);
