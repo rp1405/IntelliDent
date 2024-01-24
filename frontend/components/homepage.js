@@ -82,12 +82,13 @@ export default function Homepage({ navigation }) {
         result: data,
       };
       console.log(finalResult.result);
-      setUser((prevUser) => ({
-        ...prevUser,
-        tests: [...prevUser.tests, finalResult],
-      }));
-      await storage.setData("user", JSON.stringify(user));
-      const updatedUser = await updateUser(user);
+      const newUserData = {
+        ...user,
+        tests: [...user.tests, finalResult],
+      };
+      setUser(newUserData);
+      const updatedUser = await updateUser(newUserData);
+      await storage.setData("user", JSON.stringify(newUserData));
       async function sendDentalFile(condition, status, link, mobileNumber) {
         if (status === "positive") {
           await sendFile(mobileNumber, condition, link);
@@ -176,14 +177,16 @@ export default function Homepage({ navigation }) {
         translations[language][finalResult.result.dentalCalculus.status] +
         "\n\n" +
         "If you have any questions or concerns regarding these results, please feel free to reach out to us.\n\n" +
-        "*Contact Details of Your Dentist:*\n" +
+        "*Contact Details:*\n" +
         "*Akshay Dental Clinic*\n" +
         "- Address: 1st Floor, Chandraprabhu Market, Jai Dayal Rd, Opp. Bank of India, Vishwkarma Park, Gole Bazar, Katni, Madhya Pradesh 483501\n" +
-        "- Contact Numbers: 9425152372 9993383153\n\n" +
-        "We encourage you to schedule a follow-up appointment with Akshay Dental Clinic for further consultation or treatment if needed.\n\n" +
+        "- Contact Numbers: 9993383153\n\n" +
+        "We encourage you to schedule a follow-up appointment with Akshay Dental care or share your assessment with  family dentist for further consultation or treatment.\n\n" +
         "Thank you for trusting Intellident for your dental care. We look forward to continuing to support your health and wellness.\n\n" +
+        "Our goal\n" +
+        "PREVENTION IS BETTER THAN CURE\n\n" +
         "Best Regards,\n" +
-        "Intellident";
+        "Team Intellident";
       const messageHindi =
         "प्रिय " +
         user.name +
@@ -216,11 +219,13 @@ export default function Homepage({ navigation }) {
         "*आपके दंतचिकित्सक की संपर्क जानकारी:*\n" +
         "*अक्षय डेंटल क्लिनिक*\n" +
         "- पता: 1वीं मंजिल, चंद्रप्रभु मार्केट, जय दयाल रोड, बैंक ऑफ इंडिया के सामने, विश्वकर्मा पार्क, गोले बाजार, कटनी, मध्य प्रदेश 483501\n" +
-        "- संपर्क नंबर: 9425152372, 9993383153\n\n" +
-        "हम आपको आवश्यकता होने पर आक्षय डेंटल क्लिनिक के साथ एक फॉलो-अप अपॉइंटमेंट निर्धारित करने की सलाह देते हैं।\n\n" +
+        "- संपर्क नंबर: 9993383153\n\n" +
+        "हम आपको प्रेरित करते हैं कि आप एक आगामी मुलाकात का समय अक्षय डेंटल केयर के साथ तय करें या आपकी मुलाकात का मूल्यांकन परिवार के दंत चिकित्सक के साथ साझा करें, ताकि आपको आगे की परामर्श या उपचार के लिए सुझाव मिल सके।\n\n" +
         "आपके दंत स्वास्थ्य के लिए इंटेलीडेंट का विश्वास करने के लिए धन्यवाद। हम आपके स्वास्थ्य और कल्याण का समर्थन करने के लिए उत्सुक हैं।\n\n" +
+        "हमारा लक्ष्य\n" +
+        "रोकथाम इलाज से बेहतर है\n\n" +
         "शुभकामनाएं,\n" +
-        "इंटेलीडेंट";
+        "टीम इंटेलीडेंट";
       await sendMessage(
         user.mobileNumber,
         language == "English" ? messageEnglish : messageHindi

@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import { Svg, G, Path } from "react-native-svg";
 import { Dropdown } from "react-native-element-dropdown";
-import MenuButton from "./menuButton";
 import Configuration from "../contexts/configuration";
 import Header from "./header";
 import translations from "../translations/transaltions";

@@ -14,10 +14,8 @@ import {
 } from "react-native";
 import { Svg, G, Path } from "react-native-svg";
 import * as permissions from "expo-permissions";
-import MenuButton from "./menuButton";
 import Configuration from "../contexts/configuration";
 import translations from "../translations/transaltions";
-import { createStackNavigator } from "@react-navigation/stack";
 import Header from "./header";
 export default function AllTests({ route, navigation }) {
   const { user, setUser, Loading, setLoading, language } =

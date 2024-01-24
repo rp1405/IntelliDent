@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useContext, useState } from "react";
 import { useFonts } from "@expo-google-fonts/gruppo";
-import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Gruppo_400Regular } from "@expo-google-fonts/gruppo";
@@ -29,10 +28,7 @@ import Signup from "./components/signup";
 import Home from "./components/home";
 import CreateNewAccount from "./components/createNewAccount";
 import OtpScreen from "./components/otpScreen";
-import Result from "./components/allTests";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Configuration from "./contexts/configuration";
-import ErrorBoundary from "react-native-error-boundary";
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [user, setUser] = useState({});

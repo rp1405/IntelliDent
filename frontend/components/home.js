@@ -7,7 +7,6 @@ import { Svg, Path, G, Defs } from "react-native-svg";
 import translations from "../translations/transaltions";
 import TestDetails from "./testDetails";
 import Homepage from "./homepage";
-import Login from "./login";
 import Profile from "./Profile";
 import AllTests from "./allTests";
 import { useContext } from "react";

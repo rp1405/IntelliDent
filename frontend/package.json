@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -13,8 +13,7 @@
     "@expo-google-fonts/gruppo": "^0.2.3",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/poppins": "^0.2.3",
-    "@react-native-async-storage/async-storage": "^1.21.0",
-    "@react-native-picker/picker": "^2.6.1",
+    "@react-native-async-storage/async-storage": "1.21.0",
     "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
@@ -22,35 +21,28 @@
     "axios": "^1.6.2",
     "babel-plugin-transform-flow-enums": "^0.0.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "cocoapods": "^0.0.0",
-    "expo": "~49.0.15",
-    "expo-font": "~11.4.0",
-    "expo-image-picker": "^14.5.0",
-    "expo-permissions": "^14.4.0",
-    "expo-status-bar": "~1.6.0",
-    "i18next": "^23.7.16",
-    "install": "^0.13.0",
+    "expo": "^50.0.0",
+    "expo-font": "~11.10.2",
+    "expo-image-picker": "~14.7.1",
+    "expo-permissions": "^14.2.1",
+    "expo-splash-screen": "~0.26.4",
+    "expo-status-bar": "~1.11.1",
     "intl": "^1.2.5",
     "intl-pluralrules": "^2.0.1",
     "jetifier": "^2.0.0",
-    "npm": "^10.2.5",
     "react": "18.2.0",
-    "react-i18next": "^14.0.0",
     "react-loading": "^2.0.3",
-    "react-native": "0.72.6",
+    "react-native": "0.73.2",
+    "react-native-dotenv": "^3.4.9",
     "react-native-element-dropdown": "^2.10.1",
     "react-native-elements": "^3.4.3",
-    "react-native-error-boundary": "^1.2.4",
-    "react-native-gesture-handler": "~2.12.0",
-    "react-native-image-picker": "^7.1.0",
-    "react-native-reanimated": "~3.3.0",
-    "react-native-screens": "^3.29.0",
-    "react-native-svg": "^14.1.0"
+    "react-native-screens": "~3.29.0",
+    "react-native-svg": "14.1.0",
+    "react-native-reanimated": "3.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@babel/plugin-syntax-flow": "^7.23.3",
-    "@babel/plugin-transform-flow-strip-types": "^7.23.3"
+    "react-native-dotenv": "^3.4.9"
   },
   "private": true
 }

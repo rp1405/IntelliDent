@@ -14,8 +14,6 @@ import {
   Dimensions,
 } from "react-native";
 import { Svg, Path, Circle, Rect } from "react-native-svg";
-import Backbutton from "./backbutton";
-import { ScrollView } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import {
   getUserDataByMobileNumber,
@@ -25,6 +23,7 @@ import {
 import { useContext, useState } from "react";
 import Configuration from "../contexts/configuration";
 import storage from "../functionality/localStorage";
+import { sendMessage } from "../functionality/messageService";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 export default function Signup({ route, navigation }) {
@@ -32,8 +31,9 @@ export default function Signup({ route, navigation }) {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  const { user, setUser, loading, setLoading } = useContext(Configuration);
-  const handleClick = () => {
+  const { user, setUser, loading, setLoading, language } =
+    useContext(Configuration);
+  const handleClick = async () => {
     setLoading(true);
     const userDetails = {
       name: name,
@@ -60,6 +60,18 @@ export default function Signup({ route, navigation }) {
         Alert.alert("OOPS!", "Some error occured. Please try again");
         console.log(error);
       });
+    const messageHindi =
+      "इंटेलीडेंट में आपका स्वागत है।\nहम एक परिसर दंत रोग उत्साहिता के दल हैं जो इच्छुक हैं कि ज्ञान और समय की कमी के कारण देर से दंत उपचार की प्रवृत्ति को समाप्त करें। हमारे ए.आई. आधारित एप्लिकेशन से सभी दंत बीमारियों की पहचान होती है और आवश्यक उपचार की सिफारिश की जाती है। हम आपकी सेवा करना चाहते हैं या आपको इसे अपने परिवार के दंत चिकित्सक के साथ साझा करने के लिए प्रोत्साहित करना चाहते हैं ताकि खर्च और समय की बचत हो सके।\n\n" +
+      '"INTELLIDENT" बहुभाषी (अंग्रेजी और हिंदी) है, जिससे सभी के लिए यह सरल है। 5 मिनट से कम समय में शून्य लागत पर पूर्ण मौखिक स्कैन हमारा लक्ष्य प्रतिरोध से बेहतर है को सबसे अच्छे तरीके से पूरा करता है। हम आशा करते हैं कि आपको हमारे साथ अच्छा अनुभव होगा। हमें बेहतर बनाने के लिए प्रोत्साहन और सकारात्मक आलोचना की प्रतीक्षा है।\n\n' +
+      "शुभकामनाएँ,\nटीम इंटेलिडेंट";
+    const messageEnglish =
+      "Welcome to INTELLIDENT\nWe are a team of preventive dental disease enthusiasts who wish to eliminate the tendency of delayed dental treatment due to a lack of knowledge and time. Our AI BASED APPLICATION detects all dental ailments and recommends the needed treatment. We wish to serve you for the same or encourage you to share the inferences with your family dentist so that early treatment is performed, saving on expenses and time.\n\n" +
+      '"INTELLIDENT" is multilingual (ENGLISH & HINDI), making it easy for all. A complete oral scan in less than 5 minutes at zero cost delivers our aim PREVENTION IS BETTER THAN CURE in the best possible way. We hope you have a good experience with us. Looking forward to encouragement and positive criticism to make us better.\n\n' +
+      "Regards,\nTEAM INTELLIDENT";
+    await sendMessage(
+      userDetails.mobileNumber,
+      language == "English" ? messageEnglish : messageHindi
+    );
   };
   return (
     <TouchableWithoutFeedback

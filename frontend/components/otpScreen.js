@@ -15,7 +15,6 @@ import {
   Keyboard,
 } from "react-native";
 import Backbutton from "./backbutton";
-import { ScrollView } from "react-native";
 import Configuration from "../contexts/configuration";
 import { getUserDataByMobileNumber } from "../functionality/dataOperations";
 import translations from "../translations/transaltions";

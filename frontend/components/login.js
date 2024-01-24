@@ -16,7 +16,6 @@ import {
 import { sendOTP } from "../functionality/messageService";
 import translations from "../translations/transaltions";
 import Backbutton from "./backbutton";
-import { ScrollView } from "react-native";
 import { getUserDataByMobileNumber } from "../functionality/dataOperations";
 import Configuration from "../contexts/configuration";
 const screenWidth = Dimensions.get("window").width;

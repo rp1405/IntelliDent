@@ -9,7 +9,6 @@ import {
   Dimensions,
 } from "react-native";
 import { useState, useContext } from "react";
-import { Dropdown } from "react-native-element-dropdown";
 import Configuration from "../contexts/configuration";
 import translations from "../translations/transaltions";
 import storage from "../functionality/localStorage";

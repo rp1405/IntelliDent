@@ -12,9 +12,7 @@ const translations = {
     //Login Page
     loginHeading: "Login to your account",
     otpBasedLogin: "OTP Based Login",
-    receiveOTP: "You will receive a One Time Password (OTP) on this number",
     noAccount: "Don't have an account? Signup",
-    getOTP: "Get OTP",
     error: "Error",
     noUserExists: "No user exists with the given phone number",
     enterMobileNumberPlaceholder: "Enter Mobile Number",
@@ -27,7 +25,6 @@ const translations = {
     haveAccount: "Already have an account? ",
     login: "Login",
     getOTP: "Get OTP",
-    error: "Error",
     userExists: "User already exists",
 
     //OTP screen
@@ -42,12 +39,8 @@ const translations = {
     submit: "Submit",
     gallery: "Gallery",
     camera: "Camera",
-    error: "Error",
     selectImage: "Please select an image",
     cameraPermission: "Please provide camera permissions",
-
-    //Profile
-    logout: "Logout",
 
     //Test Card
     testId: "Test Id",
@@ -95,12 +88,9 @@ const translations = {
     //Signup Page
     createNewAccountHeading: "नया खाता बनाएं",
     verifyMobileNumber: "अपना मोबाइल नंबर सत्यापित करें",
-    receiveOTP: "इस नंबर पर एक समय पासवर्ड (OTP) प्राप्त करेंगे",
     enterMobileNumber: "मोबाइल नंबर दर्ज करें",
     haveAccount: "पहले से ही एक खाता है? ",
     login: "लॉगिन करें",
-    getOTP: "OTP प्राप्त करें",
-    error: "त्रुटि",
     userExists: "उपयोगकर्ता पहले से ही मौजूद है",
 
     //OTP Screen
@@ -114,12 +104,8 @@ const translations = {
     submit: "प्रस्तुत करें",
     gallery: "गैलरी",
     camera: "कैमरा",
-    error: "त्रुटि",
     selectImage: "कृपया एक छवि का चयन करें",
     cameraPermission: "कृपया कैमरा अनुमतियों प्रदान करें",
-
-    //Profile
-    logout: "लॉगआउट",
 
     //Test Card
     testId: "टेस्ट आईडी",
