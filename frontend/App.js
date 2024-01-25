@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import "react-native-gesture-handler";
 import { useContext, useState } from "react";
 import { useFonts } from "@expo-google-fonts/gruppo";
 import { NavigationContainer } from "@react-navigation/native";
