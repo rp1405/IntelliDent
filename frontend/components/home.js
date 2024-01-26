@@ -24,7 +24,10 @@ export default function Home() {
                 style={[
                   styles.setColorWhite,
                   styles.fontSize(50),
-                  { fontFamily: "Gruppo_400Regular" },
+                  {
+                    fontFamily:
+                      language == "English" ? "Gruppo_400Regular" : "",
+                  },
                 ]}
               >
                 {translations[language].intelliDent}

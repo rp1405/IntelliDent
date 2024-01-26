@@ -138,6 +138,7 @@ export default function OtpScreen({ route, navigation }) {
         </View>
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
+            disabled={loading}
             onPress={() => {
               navigation.navigate("Login");
             }}
@@ -153,7 +154,11 @@ export default function OtpScreen({ route, navigation }) {
             style={{ marginTop: 0.01 * screenHeight }}
           />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleClick}>
+        <TouchableOpacity
+          disabled={loading}
+          style={styles.button}
+          onPress={handleClick}
+        >
           <Text style={styles.buttonText}>
             {translations[language].verifyOtp}
           </Text>

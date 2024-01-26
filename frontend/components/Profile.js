@@ -20,7 +20,8 @@ import storage from "../functionality/localStorage";
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
 export default function Profile({ navigation }) {
-  const { user, setUser, language, setLanguage } = useContext(Configuration);
+  const { user, setUser, language, setLanguage, loading } =
+    useContext(Configuration);
   return (
     <>
       <View style={styles.container}>
@@ -86,6 +87,7 @@ export default function Profile({ navigation }) {
           </Text>
         </View>
         <TouchableOpacity
+          disabled={loading}
           style={[
             styles.button,
             { display: "flex", flexDirection: "row", justifyContent: "center" },

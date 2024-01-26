@@ -14,7 +14,13 @@ import {
   Dimensions,
 } from "react-native";
 import { Svg, G, Path } from "react-native-svg";
-import { launchCameraAsync, launchImageLibraryAsync } from "expo-image-picker";
+import {
+  launchCameraAsync,
+  launchImageLibraryAsync,
+  getCameraPermissionsAsync,
+  getMediaLibraryPermissionsAsync,
+} from "expo-image-picker";
+import * as ImagePicker from "expo-image-picker";
 import * as permissions from "expo-permissions";
 import Header from "./header";
 import Configuration from "../contexts/configuration";
@@ -33,18 +39,30 @@ export default function Homepage({ navigation }) {
   const [img, setImg] = useState(null);
   const [imgUrl, setImgUrl] = useState(placeholderImage);
   const openCamera = async () => {
-    const newpermission = await permissions.askAsync(permissions.CAMERA);
+    const newpermission = await ImagePicker.requestCameraPermissionsAsync();
+    console.log(newpermission);
     if (newpermission.status != "granted") {
       Alert.alert(
         translations[language].error,
         translations[language].cameraPermissions
       );
+      return;
     }
     const result = await launchCameraAsync();
     setImg(result?.assets[0]);
     setImgUrl(result?.assets[0]?.uri);
   };
   const openGallery = async () => {
+    const newpermission =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    console.log(newpermission);
+    if (newpermission.status != "granted") {
+      Alert.alert(
+        translations[language].error,
+        translations[language].cameraPermissions
+      );
+      return;
+    }
     const result = await launchImageLibraryAsync();
     setImg(result?.assets[0]);
     setImgUrl(result?.assets[0]?.uri);
@@ -70,7 +88,7 @@ export default function Homepage({ navigation }) {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "JSON",
+          "Content-type": "application/json",
         },
         body: formData,
         redirect: "follow",
@@ -239,7 +257,9 @@ export default function Homepage({ navigation }) {
         test: finalResult,
       });
     } catch (error) {
+      setLoading(false);
       console.log(error);
+      // Alert("Error", error);
     }
     setLoading(false);
   };
@@ -267,6 +287,7 @@ export default function Homepage({ navigation }) {
           ></Image>
           <View style={{ marginTop: "-23%" }}>
             <TouchableOpacity
+              disabled={loading}
               onPress={imageUpload}
               style={{
                 backgroundColor: "black",
@@ -280,8 +301,12 @@ export default function Homepage({ navigation }) {
                 alignItems: "center",
               }}
             >
-              {loading ? (
-                <ActivityIndicator color="white" animating={loading} />
+              {loading == true ? (
+                <ActivityIndicator
+                  size="small"
+                  color="white"
+                  animating={true}
+                />
               ) : (
                 <View>
                   <Text
@@ -308,7 +333,7 @@ export default function Homepage({ navigation }) {
           }}
         >
           <View style={{ alignItems: "center" }}>
-            <TouchableOpacity onPress={openGallery}>
+            <TouchableOpacity disabled={loading} onPress={openGallery}>
               <Svg
                 height="80"
                 id="Layer_1"
@@ -333,7 +358,7 @@ export default function Homepage({ navigation }) {
               marginLeft: "40%",
             }}
           >
-            <TouchableOpacity onPress={openCamera}>
+            <TouchableOpacity disabled={loading} onPress={openCamera}>
               <Svg
                 height="80"
                 id="Layer_1"

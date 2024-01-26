@@ -102,6 +102,7 @@ export default function CreateNewAccount({ navigation }) {
         </View>
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
+            disabled={loading}
             onPress={() => {
               navigation.navigate("Login");
             }}
@@ -118,7 +119,11 @@ export default function CreateNewAccount({ navigation }) {
             style={{ marginTop: 0.01 * screenHeight }}
           />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleClick}>
+        <TouchableOpacity
+          disabled={loading}
+          style={styles.button}
+          onPress={handleClick}
+        >
           <Text style={styles.buttonText}>{translations[language].getOTP}</Text>
         </TouchableOpacity>
       </View>

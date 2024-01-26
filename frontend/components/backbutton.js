@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Button,
   StyleSheet,
@@ -7,10 +8,13 @@ import {
   View,
 } from "react-native";
 import { Svg, Path } from "react-native-svg";
+import Configuration from "../contexts/configuration";
 export default function Backbutton({ navigation, color }) {
+  const { loading } = useContext(Configuration);
   return (
     <TouchableOpacity
       style={{ position: "absolute", left: 0, top: 0 }}
+      disabled={loading}
       onPress={() => {
         navigation.goBack();
       }}

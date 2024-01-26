@@ -11,7 +11,7 @@ const addNewUser = async (data) => {
 const getUserDataById = async (id) => {
   try {
     const url =
-      process.env.EXPO_PUBLIC_BACKEND_API_LINK + "/getUserDataByID?id=";
+      process.env.EXPO_PUBLIC_BACKEND_API_LINK + "/getUserDataById?id=";
     const response = await axios.get(url + id);
     return response.data;
   } catch (error) {

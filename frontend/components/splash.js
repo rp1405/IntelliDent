@@ -7,13 +7,19 @@ import {
   TouchableOpacity,
   Switch,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useContext } from "react";
 import Configuration from "../contexts/configuration";
 import translations from "../translations/transaltions";
 import storage from "../functionality/localStorage";
+import {
+  getUserDataById,
+  getUserDataByMobileNumber,
+} from "../functionality/dataOperations";
 export default function Splash({ navigation }) {
-  const { language, setLanguage, setUser } = useContext(Configuration);
+  const { user, language, setLanguage, setUser, loading, setLoading } =
+    useContext(Configuration);
   const [animationDes, setAnimationDes] = useState(40);
   const initialPosition = new Animated.Value(0);
   const flowOpacity = new Animated.Value(1);
@@ -50,6 +56,61 @@ export default function Splash({ navigation }) {
       sentencesOpacity.removeListener(listener);
     };
   }, [sentencesOpacity]);
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "black",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    mainText: {
+      fontFamily: language == "English" ? "Gruppo_400Regular" : "",
+      fontWeight: 200,
+      fontSize: 60,
+      color: "white",
+      textAlign: "center",
+    },
+    tagline: {
+      fontFamily: "Poppins_400Regular",
+      fontSize: 12, // Adjust the font size based on your preference
+      color: "white",
+      textAlign: "center",
+    },
+    touchable: {
+      backgroundColor: "transparent",
+      borderRadius: 5,
+      padding: 20,
+      margin: 10,
+      borderColor: "white",
+      borderWidth: 0.3,
+    },
+    buttonText: {
+      fontFamily: "Poppins_400Regular",
+      color: "white",
+      fontSize: 20,
+      textAlign: "center",
+    },
+    dropdown: {
+      marginTop: "5%",
+      alignSelf: "center",
+      width: "20%",
+      fontSize: 20,
+      padding: 5,
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#91969E",
+      borderRadius: 5,
+      height: 55,
+    },
+    dropdownPlaceholder: {
+      fontSize: 20,
+      color: "#C7C7CD",
+    },
+    dropdownText: {
+      fontSize: 20,
+      color: "#C7C7CD",
+    },
+  });
   return (
     <View style={styles.container}>
       <Animated.View
@@ -60,25 +121,40 @@ export default function Splash({ navigation }) {
           top: animationDes + "%",
         }}
       >
-        <Text component="h1" style={[styles.mainText]}>
+        <Text style={[styles.mainText]}>
           {translations[language].intelliDent}
         </Text>
         <Text style={[styles.tagline, { marginTop: 10 }]}>
           {translations[language].dentalCareXAI}
         </Text>
       </Animated.View>
-      <Animated.View style={{ marginTop: 100, opacity: sentencesOpacity }}>
+      <Animated.View
+        style={{ marginTop: screenHeight * 0.25, opacity: sentencesOpacity }}
+      >
         <TouchableOpacity
+          disabled={loading}
           style={styles.touchable}
           onPress={async () => {
-            const isLoggedIn = await storage.getData("isLoggedIn");
-            console.log(isLoggedIn);
-            if (isLoggedIn == "true") {
-              const userData = await storage.getData("user");
-              setUser(JSON.parse(userData));
-              navigation.navigate("Home");
-            } else {
-              navigation.navigate("Login");
+            try {
+              setLoading(true);
+              const isLoggedIn = await storage.getData("isLoggedIn");
+              console.log(isLoggedIn);
+              if (isLoggedIn == "true") {
+                let userData = await storage.getData("user");
+                userData = JSON.parse(userData);
+                console.log(userData.mobileNumber);
+                let storedData = await getUserDataById(userData.id);
+                console.log("stored Data:", storedData);
+                setUser(storedData);
+                console.log(user);
+                setLoading(false);
+                navigation.navigate("Home");
+              } else {
+                setLoading(false);
+                navigation.navigate("Login");
+              }
+            } catch (e) {
+              console.log(e);
             }
           }}
         >
@@ -87,6 +163,7 @@ export default function Splash({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={loading}
           style={styles.touchable}
           onPress={() => {
             navigation.navigate("CreateNewAccount");
@@ -115,63 +192,13 @@ export default function Splash({ navigation }) {
           />
           <Text style={styles.tagline}>{translations[language].hindi}</Text>
         </View>
+        <ActivityIndicator
+          style={{ marginTop: 15 }}
+          size="large"
+          color="white"
+          animating={loading}
+        />
       </Animated.View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mainText: {
-    fontFamily: "Gruppo_400Regular",
-    fontWeight: 200,
-    fontSize: 60,
-    color: "white",
-    textAlign: "center",
-  },
-  tagline: {
-    fontFamily: "Poppins_400Regular",
-    fontSize: 12, // Adjust the font size based on your preference
-    color: "white",
-    textAlign: "center",
-  },
-  touchable: {
-    backgroundColor: "transparent",
-    borderRadius: 5,
-    padding: 20,
-    margin: 10,
-    borderColor: "white",
-    borderWidth: 0.3,
-  },
-  buttonText: {
-    fontFamily: "Poppins_400Regular",
-    color: "white",
-    fontSize: 20,
-    textAlign: "center",
-  },
-  dropdown: {
-    marginTop: "5%",
-    alignSelf: "center",
-    width: "20%",
-    fontSize: 20,
-    padding: 5,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#91969E",
-    borderRadius: 5,
-    height: 55,
-  },
-  dropdownPlaceholder: {
-    fontSize: 20,
-    color: "#C7C7CD",
-  },
-  dropdownText: {
-    fontSize: 20,
-    color: "#C7C7CD",
-  },
-});

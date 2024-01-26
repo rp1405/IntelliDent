@@ -159,7 +159,11 @@ export default function Signup({ route, navigation }) {
             animating={loading}
             style={{ marginBottom: 10 }}
           />
-          <TouchableOpacity style={styles.button} onPress={handleClick}>
+          <TouchableOpacity
+            disabled={loading}
+            style={styles.button}
+            onPress={handleClick}
+          >
             <Text style={styles.buttonText}>Create Account</Text>
           </TouchableOpacity>
         </View>

@@ -40,7 +40,7 @@ const translations = {
     gallery: "Gallery",
     camera: "Camera",
     selectImage: "Please select an image",
-    cameraPermission: "Please provide camera permissions",
+    cameraPermission: "Please provide the required permissions",
 
     //Test Card
     testId: "Test Id",
@@ -105,7 +105,7 @@ const translations = {
     gallery: "गैलरी",
     camera: "कैमरा",
     selectImage: "कृपया एक छवि का चयन करें",
-    cameraPermission: "कृपया कैमरा अनुमतियों प्रदान करें",
+    cameraPermission: "कृपया अनुमतिया प्रदान करें",
 
     //Test Card
     testId: "टेस्ट आईडी",

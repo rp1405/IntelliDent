@@ -42,7 +42,7 @@ const Header = ({ navigation, theme }) => {
           component="h1"
           style={{
             alignSelf: "center",
-            fontFamily: "Gruppo_400Regular",
+            fontFamily: language == "English" ? "Gruppo_400Regular" : "",
             fontSize: 33,
             color: theme == "dark" ? "white" : "black",
           }}

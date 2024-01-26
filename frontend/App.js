@@ -11,7 +11,8 @@ import "react-native-gesture-handler";
 import { useContext, useState } from "react";
 import { useFonts } from "@expo-google-fonts/gruppo";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Gruppo_400Regular } from "@expo-google-fonts/gruppo";
 import "intl-pluralrules";
 import {
@@ -30,7 +31,7 @@ import Home from "./components/home";
 import CreateNewAccount from "./components/createNewAccount";
 import OtpScreen from "./components/otpScreen";
 import Configuration from "./contexts/configuration";
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 export default function App() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
@@ -52,19 +53,24 @@ export default function App() {
     <Configuration.Provider
       value={{ user, setUser, loading, setLoading, language, setLanguage }}
     >
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Splash"
-        >
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="CreateNewAccount" component={CreateNewAccount} />
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="OtpScreen" component={OtpScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+            initialRouteName="Splash"
+          >
+            <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen
+              name="CreateNewAccount"
+              component={CreateNewAccount}
+            />
+            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="OtpScreen" component={OtpScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </Configuration.Provider>
   );
 }
