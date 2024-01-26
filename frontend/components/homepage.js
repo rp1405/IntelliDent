@@ -81,15 +81,15 @@ export default function Homepage({ navigation }) {
       formData.append("upload_file", {
         //model is expecting a file named upload_file
         uri: img.uri,
-        name: "image.jpg", // Set a specific name for the file
+        name: `image.${img.uri.split(".").pop()}`, // Set a specific name for the file
         type: `image/${img.uri.split(".").pop()}`, // Determine the image type dynamically
       });
       const response = await fetch("http://139.59.44.237:8000/get_image", {
         method: "POST",
-        headers: {
+        headers: new Headers({
           Accept: "application/json",
-          "Content-type": "application/json",
-        },
+          "Content-Type": "multipart/form-data",
+        }),
         body: formData,
         redirect: "follow",
       });
