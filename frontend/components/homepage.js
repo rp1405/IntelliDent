@@ -21,7 +21,6 @@ import {
   getMediaLibraryPermissionsAsync,
 } from "expo-image-picker";
 import * as ImagePicker from "expo-image-picker";
-import * as permissions from "expo-permissions";
 import Header from "./header";
 import Configuration from "../contexts/configuration";
 import translations from "../translations/transaltions";
@@ -267,6 +266,7 @@ export default function Homepage({ navigation }) {
     <>
       <View style={styles.container}>
         <Header theme="light" navigation={navigation} />
+
         <View style={{ alignItems: "center" }}>
           <Text
             style={{
@@ -323,6 +323,7 @@ export default function Homepage({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
         <View
           style={{
             position: "absolute",
