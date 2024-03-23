@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Button,
   ScrollView,
@@ -13,7 +13,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import { Svg, G, Path } from "react-native-svg";
+import { Svg, G, Path, Line, Circle } from "react-native-svg";
 import {
   launchCameraAsync,
   launchImageLibraryAsync,
@@ -28,6 +28,7 @@ import { updateUser } from "../functionality/dataOperations";
 import storage from "../functionality/localStorage";
 import { sendFile, sendMessage } from "../functionality/messageService";
 import treatment from "../functionality/treatments";
+import AlertAsync from "react-native-alert-async";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 export default function Homepage({ navigation }) {
@@ -35,36 +36,74 @@ export default function Homepage({ navigation }) {
     useContext(Configuration);
   const placeholderImage =
     "https://placehold.co/1000x1000/FFFFFF/000000/webp?text=Add+Image&font=Montserrat";
-  const [img, setImg] = useState(null);
+  const [img, setImg] = useState(require("../assets/icon.png"));
   const [imgUrl, setImgUrl] = useState(placeholderImage);
+  const [imageSize, setImageSize] = useState({ width: 100, height: 100 });
+  console.log(img);
+  console.log(imageSize);
+  useEffect(() => {
+    Image.getSize(img?.uri, (width, height) => {
+      let vh = screenWidth * 1.2;
+      let vw = screenWidth * 0.9;
+      if ((vw * height) / width > vh) {
+        setImageSize({ width: (vh * width) / height, height: vh });
+      } else {
+        setImageSize({ width: vw, height: (vw * height) / width });
+      }
+    });
+  }, [img]);
   const openCamera = async () => {
-    const newpermission = await ImagePicker.requestCameraPermissionsAsync();
-    console.log(newpermission);
-    if (newpermission.status != "granted") {
-      Alert.alert(
-        translations[language].error,
-        translations[language].cameraPermissions
+    try {
+      await AlertAsync(
+        translations[language].information,
+        translations[language].cropWarning,
+        [{ text: "OK", onPress: () => {} }],
+        { cancelable: false }
       );
-      return;
+      const newpermission = await ImagePicker.requestCameraPermissionsAsync();
+      console.log(newpermission);
+      if (newpermission.status != "granted") {
+        Alert.alert(
+          translations[language].error,
+          translations[language].cameraPermissions
+        );
+        return;
+      }
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+      });
+      setImg(result?.assets[0]);
+      setImgUrl(result?.assets[0]?.uri);
+    } catch (error) {
+      console.log(error);
     }
-    const result = await launchCameraAsync();
-    setImg(result?.assets[0]);
-    setImgUrl(result?.assets[0]?.uri);
   };
   const openGallery = async () => {
-    const newpermission =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-    console.log(newpermission);
-    if (newpermission.status != "granted") {
-      Alert.alert(
-        translations[language].error,
-        translations[language].cameraPermissions
+    try {
+      await AlertAsync(
+        translations[language].information,
+        translations[language].cropWarning,
+        [{ text: "OK", onPress: () => {} }],
+        { cancelable: false }
       );
-      return;
+      const newpermission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      console.log(newpermission);
+      if (newpermission.status != "granted") {
+        Alert.alert(
+          translations[language].error,
+          translations[language].cameraPermissions
+        );
+        return;
+      }
+      const result = await launchImageLibraryAsync({
+        allowsEditing: true,
+      });
+      setImg(result?.assets[0]);
+      setImgUrl(result?.assets[0]?.uri);
+    } catch (error) {
+      console.log(error);
     }
-    const result = await launchImageLibraryAsync();
-    setImg(result?.assets[0]);
-    setImgUrl(result?.assets[0]?.uri);
   };
   const imageUpload = async () => {
     if (img == null) {
@@ -252,7 +291,7 @@ export default function Homepage({ navigation }) {
         language == "English" ? messageEnglish : messageHindi
       );
       setImgUrl(placeholderImage);
-      navigation.navigate("testDetails", {
+      navigation.navigate("ResultSplash", {
         test: finalResult,
       });
     } catch (error) {
@@ -278,13 +317,43 @@ export default function Homepage({ navigation }) {
           >
             {translations[language].selectMode}
           </Text>
-          <Image
-            source={{
-              uri: imgUrl,
+          <View
+            style={{
+              height: 1.2 * screenWidth,
+              width: 0.9 * screenWidth,
+              alignItems: "center",
+              justifyContent: "center",
             }}
-            height={1.2 * screenWidth}
-            width={0.9 * screenWidth}
-          ></Image>
+          >
+            {imgUrl == placeholderImage ? (
+              <Svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="200"
+                height="200"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-image-plus"
+              >
+                <Path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+                <Line x1="16" x2="22" y1="5" y2="5" />
+                <Line x1="19" x2="19" y1="2" y2="8" />
+                <Circle cx="9" cy="9" r="2" />
+                <Path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+              </Svg>
+            ) : (
+              <Image
+                source={{
+                  uri: imgUrl,
+                }}
+                height={imageSize.height}
+                width={imageSize.width}
+              ></Image>
+            )}
+          </View>
           <View style={{ marginTop: "-23%" }}>
             <TouchableOpacity
               disabled={loading}

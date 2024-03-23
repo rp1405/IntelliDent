@@ -85,7 +85,7 @@ export default function AllTests({ route, navigation }) {
     <>
       <ScrollView style={styles.container}>
         <Header theme="dark" navigation={navigation} />
-        {tests.map((obj, index) => {
+        {tests?.map((obj, index) => {
           return <TestCard key={index} test={obj} />;
         })}
       </ScrollView>

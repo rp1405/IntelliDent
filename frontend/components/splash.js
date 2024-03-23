@@ -8,6 +8,7 @@ import {
   Switch,
   Dimensions,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { useState, useContext } from "react";
 import Configuration from "../contexts/configuration";
@@ -20,14 +21,14 @@ import {
 export default function Splash({ navigation }) {
   const { user, language, setLanguage, setUser, loading, setLoading } =
     useContext(Configuration);
-  const [animationDes, setAnimationDes] = useState(40);
+  const [animationDes, setAnimationDes] = useState(30);
   const initialPosition = new Animated.Value(0);
   const flowOpacity = new Animated.Value(1);
   const sentencesOpacity = new Animated.Value(0);
   const screenHeight = Dimensions.get("window").height;
   const translateY = initialPosition.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, -0.15 * screenHeight],
+    outputRange: [0, -0.2 * screenHeight],
   });
   const moveFlowUp = Animated.timing(initialPosition, {
     toValue: 1,
@@ -49,7 +50,7 @@ export default function Splash({ navigation }) {
   useEffect(() => {
     const listener = sentencesOpacity.addListener(({ value }) => {
       if (value === 1) {
-        setAnimationDes(25);
+        setAnimationDes(10);
       }
     });
     return () => {
@@ -121,6 +122,10 @@ export default function Splash({ navigation }) {
           top: animationDes + "%",
         }}
       >
+        <Image
+          style={{ height: 100, width: 100, alignSelf: "center" }}
+          source={require("../assets/icon.png")}
+        ></Image>
         <Text style={[styles.mainText]}>
           {translations[language].intelliDent}
         </Text>
@@ -129,7 +134,7 @@ export default function Splash({ navigation }) {
         </Text>
       </Animated.View>
       <Animated.View
-        style={{ marginTop: screenHeight * 0.25, opacity: sentencesOpacity }}
+        style={{ marginTop: screenHeight * 0.35, opacity: sentencesOpacity }}
       >
         <TouchableOpacity
           disabled={loading}

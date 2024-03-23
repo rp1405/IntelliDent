@@ -19,6 +19,7 @@ import Configuration from "../contexts/configuration";
 import Header from "./header";
 import translations from "../translations/transaltions";
 import treatment from "../functionality/treatments";
+import Backbutton from "./backbutton";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 export default function TestDetails({ route, navigation }) {
@@ -27,6 +28,7 @@ export default function TestDetails({ route, navigation }) {
   const result = route.params.test.result;
   // console.log(result);
   const keys = Object.keys(result);
+  const [imageSize, setImageSize] = useState({ width: 100, height: 100 });
   function camelCaseToSpacedText(camelCaseString) {
     const spacedText = camelCaseString.replace(/([a-z])([A-Z])/g, "$1 $2");
     return spacedText.charAt(0).toUpperCase() + spacedText.slice(1);
@@ -43,7 +45,36 @@ export default function TestDetails({ route, navigation }) {
   return (
     <>
       <ScrollView style={styles.container}>
-        <Header theme="dark" navigation={navigation} />
+        <View
+          style={{
+            justifyContent: "center",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: "2%",
+            width: "100%",
+          }}
+        >
+          <Backbutton navigation={navigation} color="white" />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignSelf: "stretch",
+            }}
+          >
+            <Text
+              component="h1"
+              style={{
+                alignSelf: "center",
+                fontFamily: language == "English" ? "Gruppo_400Regular" : "",
+                fontSize: 33,
+                color: "white",
+              }}
+            >
+              {translations[language].intelliDent}
+            </Text>
+          </View>
+        </View>
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.dropdownPlaceholder}
@@ -88,7 +119,8 @@ export default function TestDetails({ route, navigation }) {
             </Text>
             <Image
               style={{
-                height: screenWidth * 1.2,
+                height:
+                  (screenWidth * 0.9 * imageSize.height) / imageSize.width,
                 width: screenWidth * 0.9,
                 alignSelf: "center",
                 marginTop: "5%",

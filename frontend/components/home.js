@@ -9,9 +9,10 @@ import TestDetails from "./testDetails";
 import Homepage from "./homepage";
 import Profile from "./Profile";
 import AllTests from "./allTests";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Configuration from "../contexts/configuration";
-export default function Home() {
+import InternalStackNavigation from "./internalStackNavigation";
+export default function Home({ navigation }) {
   const { language } = useContext(Configuration);
   const Drawer = createDrawerNavigator();
   return (
@@ -85,8 +86,8 @@ export default function Home() {
           ),
           title: translations[language].home,
         }}
-        name="Homepage"
-        component={Homepage}
+        name="InternalStackNavigation"
+        component={InternalStackNavigation}
       />
       <Drawer.Screen
         options={{
@@ -130,15 +131,6 @@ export default function Home() {
         }}
         name="Profile"
         component={Profile}
-      />
-      <Drawer.Screen
-        options={{
-          drawerIcon: () => null,
-          title: () => null,
-          drawerActiveBackgroundColor: "black",
-        }}
-        name="testDetails"
-        component={TestDetails}
       />
     </Drawer.Navigator>
   );

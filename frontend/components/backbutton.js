@@ -13,7 +13,7 @@ export default function Backbutton({ navigation, color }) {
   const { loading } = useContext(Configuration);
   return (
     <TouchableOpacity
-      style={{ position: "absolute", left: 0, top: 0 }}
+      style={{ position: "absolute", left: 0, top: 5 }}
       disabled={loading}
       onPress={() => {
         navigation.goBack();

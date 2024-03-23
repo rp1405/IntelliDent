@@ -65,6 +65,15 @@ const translations = {
 
     positive: "Positive",
     negative: "Negative",
+
+    //Result Splash
+    goToResults: "Go to results->",
+    resultsGenerated: "Results Generated!",
+    whatsappMessage:
+      "You will also receive the complete report on Whatsapp on your registered mobile number.",
+    cropWarning:
+      "For best results, please take images of the tooth part. \nYou can use the crop feature to focus on the tooth only.",
+    information: "Information",
   },
   Hindi: {
     //Splash Page
@@ -131,6 +140,14 @@ const translations = {
 
     positive: "पाया गया",
     negative: "नहीं पाया गया",
+
+    goToResults: "परिणामों पर जाएं ->",
+    resultsGenerated: "परिणाम तैयार हैं",
+    whatsappMessage:
+      "आपके पंजीकृत मोबाइल नंबर पर आपको व्हाट्सएप पर पूरी रिपोर्ट भी मिलेगी।",
+    cropWarning:
+      "सर्वश्रेष्ठ परिणामों के लिए, कृपया दांत के हिस्से की तस्वीरें लें।\nआप केवल दांत पर ध्यान केंद्रित करने के लिए क्रॉप सुविधा का उपयोग कर सकते हैं।",
+    information: "सूचना",
   },
 };
 

@@ -31,6 +31,7 @@ import Home from "./components/home";
 import CreateNewAccount from "./components/createNewAccount";
 import OtpScreen from "./components/otpScreen";
 import Configuration from "./contexts/configuration";
+import ResultSplash from "./components/ResultSplash";
 const Stack = createStackNavigator();
 export default function App() {
   const [user, setUser] = useState({});
