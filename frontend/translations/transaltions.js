@@ -53,9 +53,10 @@ const translations = {
     home: "Home",
     yourTests: "Your Tests",
     profile: "Profile",
+    about: "About Us",
 
     //Test Details
-    treatments: "Treatments:",
+    treatments: "Treatments Advised:",
     detected: "detected",
     safe: (disease) => `You are safe from ${disease}`,
     dentalStain: "Dental Stain",
@@ -74,6 +75,10 @@ const translations = {
     cropWarning:
       "For best results, please take images of the tooth part. \nYou can use the crop feature to focus on the tooth only.",
     information: "Information",
+
+    aboutUsContent:
+      "Dr. Akshay Gupta, practicing as a prosthodontist in Katni, Madhya Pradesh since 2010, welcomes you all to IntelliDent. This is an application that aims to revolutionize dental diagnosis, home dental care, and preventive dental care with its cutting-edge artificial intelligence-based technology. With the power of machine learning and data analytics, an intelligent system has been developed to assist the common man in identifying various oral health conditions with unprecedented precision.",
+    socialMediaHandles: "Our social media hanldles:",
   },
   Hindi: {
     //Splash Page
@@ -128,11 +133,12 @@ const translations = {
     yourTests: "आपकी टेस्ट्स",
     profile: "प्रोफ़ाइल",
     logout: "लॉगआउट",
+    about: "हमारे बारे में",
 
     //Test Details
     detected: "पाया गया",
     safe: (disease) => `आप ${disease} से सुरक्षित हैं।`,
-    treatments: "उपचार:",
+    treatments: "उपचार के सुझाव:",
     dentalStain: "दांतो में दाग़",
     dentalCalculus: "पथरीली जमावत",
     dentalCavity: "दांतो में कीड़ा",
@@ -148,6 +154,11 @@ const translations = {
     cropWarning:
       "सर्वश्रेष्ठ परिणामों के लिए, कृपया दांत के हिस्से की तस्वीरें लें।\nआप केवल दांत पर ध्यान केंद्रित करने के लिए क्रॉप सुविधा का उपयोग कर सकते हैं।",
     information: "सूचना",
+
+    aboutUsContent:
+      "डॉ. अक्षय गुप्ता, 2010 से कटनी, मध्य प्रदेश में एक व्यावसायिक प्रोथोडॉन्टिस्ट के रूप में काम कर रहे हैं, आप सभी का स्वागत करते हैं इंटेलीडेंट में। यह एक एप्लिकेशन है जो अपनी उच्च-स्तरीय कृत्रिम बुद्धिमत्ता आधारित प्रौद्योगिकी के साथ डेंटल निदान, घरेलू डेंटल केयर और बचाव स्वास्थ्य देखभाल को क्रांति करने का लक्ष्य रखता है। मशीन लर्निंग और डेटा विश्लेषण की शक्ति के साथ, एक बुद्धिमत्ता प्रणाली विकसित की गई है जो सामान्य व्यक्ति को असाधारण सटीकता के साथ विभिन्न मौखिक स्वास्थ्य स्थितियों की पहचान करने में मदद करेगी।",
+
+    socialMediaHandles: "हमारे सोशल मीडिया हैंडल्स:",
   },
 };
 

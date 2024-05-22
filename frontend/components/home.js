@@ -2,8 +2,17 @@ import {
   createDrawerNavigator,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { StyleSheet, View, Text, SafeAreaView } from "react-native";
-import { Svg, Path, G, Defs } from "react-native-svg";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Dimensions,
+  Linking,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import { Svg, Path, G, Defs, Rect, Line, Circle } from "react-native-svg";
 import translations from "../translations/transaltions";
 import TestDetails from "./testDetails";
 import Homepage from "./homepage";
@@ -12,14 +21,25 @@ import AllTests from "./allTests";
 import { useContext, useEffect } from "react";
 import Configuration from "../contexts/configuration";
 import InternalStackNavigation from "./internalStackNavigation";
+import About from "./aboutUs";
+import Social from "./social";
 export default function Home({ navigation }) {
   const { language } = useContext(Configuration);
   const Drawer = createDrawerNavigator();
+  const screenHeight = Dimensions.get("window").height;
   return (
     <Drawer.Navigator
       drawerContent={(props) => {
         return (
-          <View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: screenHeight * 0.95,
+              // borderColor: "red",
+              // borderWidth: 1,
+            }}
+          >
             <View style={[{ alignItems: "center", marginTop: 20 }]}>
               <Text
                 style={[
@@ -48,6 +68,16 @@ export default function Home({ navigation }) {
               </Text>
             </View>
             <DrawerItemList {...props} />
+            <View
+              style={[
+                {
+                  position: "absolute",
+                  bottom: 0,
+                },
+              ]}
+            >
+              <Social />
+            </View>
           </View>
         );
       }}
@@ -131,6 +161,32 @@ export default function Home({ navigation }) {
         }}
         name="Profile"
         component={Profile}
+      />
+      <Drawer.Screen
+        options={{
+          drawerIcon: () => (
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sprout"
+            >
+              <Path d="M7 20h10" />
+              <Path d="M10 20c5.5-2.5.8-6.4 3-10" />
+              <Path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+              <Path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+            </Svg>
+          ),
+          title: translations[language].about,
+        }}
+        name="AboutUs"
+        component={About}
       />
     </Drawer.Navigator>
   );

@@ -42,7 +42,7 @@ const ResultSplash = ({ route, navigation }) => {
         height="250"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
+        stroke="#C5FFF8"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
