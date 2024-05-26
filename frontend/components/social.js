@@ -1,14 +1,17 @@
-import { TouchableOpacity, View } from "react-native";
+import { Alert, TouchableOpacity, View } from "react-native";
 import * as Linking from "expo-linking";
 import { Circle, Line, Path, Rect, Svg } from "react-native-svg";
 const Social = () => {
   const openUrl = async (url) => {
-    const isSupported = await Linking.canOpenURL(url);
-    if (isSupported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert("Can't open the requested url : ", url);
-    }
+    // const isSupported = await Linking.canOpenURL(url);
+    // if (isSupported) {
+    //
+    // } else {
+    //   Alert.alert("Can't open the requested url : ", url);
+    // }
+    await Linking.openURL(url).catch((err) => {
+      Alert.alert("Can't open url, Try again later!");
+    });
   };
   return (
     <View>
